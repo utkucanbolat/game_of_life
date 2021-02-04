@@ -45,7 +45,7 @@ class GameofLife:
 
     @staticmethod
     def make_movie():  # use ffmpeg to create movie out of the images saved
-        system("ffmpeg -r 10 -i frames/frame%01d.png -vcodec mpeg4 -y movie_optim_dim500.mp4")
+        system("ffmpeg -r 10 -i frames/frame%01d.png -vcodec mpeg4 -y my_movie.mp4")
 
 
 if __name__ == "__main__":
