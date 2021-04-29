@@ -76,24 +76,6 @@ class GameofLife:
         self.board = np.logical_or(np.logical_and((self.board == 1), np.logical_or(temp_board == 2, temp_board == 3)),
                                    np.logical_and((self.board == 0), (temp_board == 3)))
 
-    def _mixed(self):
-
-        temp_board = np.zeros((self.dim, self.dim))
-
-        for i in range(self.board.shape[0]):
-            for j in range(self.board.shape[1]):
-                temp_board[i, j] = self.board[(i + 1) % self.dim, j % self.dim] \
-                                   + self.board[i % self.dim, (j + 1) % self.dim] \
-                                   + self.board[(i - 1) % self.dim, j % self.dim] \
-                                   + self.board[i, (j - 1) % self.dim] \
-                                   + self.board[(i + 1) % self.dim, (j + 1) % self.dim] \
-                                   + self.board[(i - 1) % self.dim, (j + 1) % self.dim] \
-                                   + self.board[(i - 1) % self.dim, (j - 1) % self.dim] \
-                                   + self.board[(i + 1) % self.dim, (j - 1) % self.dim]
-
-        self.board = 1*np.logical_or(np.logical_and((self.board == 1), np.logical_or(temp_board == 2, temp_board == 3)),
-                                     np.logical_and((self.board == 0), (temp_board == 3)))
-
 
 if __name__ == "__main__":
     t1 = time()
