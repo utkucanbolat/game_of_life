@@ -17,28 +17,6 @@ class GameofLife:
         np.random.seed(seed)
         self.board = np.random.choice([0, 1], p=[1-self.sparseness, self.sparseness], size=[self.dim, self.dim])
 
-    def run_and_plot(self, optimized=True, pause_between_frames=0.05):
-        fig, ax = plt.subplots()
-        ln = ax.imshow(self.board, animated=True, cmap="binary")
-        plt.show(block=False)
-        plt.pause(0.1)
-        bg = fig.canvas.copy_from_bbox(fig.bbox)
-        ax.draw_artist(ln)
-        fig.canvas.blit(fig.bbox)
-
-        for j in range(self.max_step):
-            if optimized:
-                self._step_optimized()
-            else:
-                self._mixed()
-
-            fig.canvas.restore_region(bg)
-            ln = ax.imshow(self.board, animated=True, cmap="binary")
-            ax.draw_artist(ln)
-            fig.canvas.blit(fig.bbox)
-            fig.canvas.flush_events()
-            sleep(pause_between_frames)
-
     def _step_unoptimized(self):
 
         temp_board = np.zeros((self.dim, self.dim))
@@ -75,6 +53,28 @@ class GameofLife:
 
         self.board = np.logical_or(np.logical_and((self.board == 1), np.logical_or(temp_board == 2, temp_board == 3)),
                                    np.logical_and((self.board == 0), (temp_board == 3)))
+        
+    def run_and_plot(self, optimized=True, pause_between_frames=0.05):
+        fig, ax = plt.subplots()
+        ln = ax.imshow(self.board, animated=True, cmap="binary")
+        plt.show(block=False)
+        plt.pause(0.1)
+        bg = fig.canvas.copy_from_bbox(fig.bbox)
+        ax.draw_artist(ln)
+        fig.canvas.blit(fig.bbox)
+
+        for j in range(self.max_step):
+            if optimized:
+                self._step_optimized()
+            else:
+                self._mixed()
+
+            fig.canvas.restore_region(bg)
+            ln = ax.imshow(self.board, animated=True, cmap="binary")
+            ax.draw_artist(ln)
+            fig.canvas.blit(fig.bbox)
+            fig.canvas.flush_events()
+            sleep(pause_between_frames)
 
 
 if __name__ == "__main__":
