@@ -44,7 +44,7 @@ class GameofLife:
 
         self.board = temp_board
 
-    def _step_optimized(self):  # calculate each step
+    def _step_optimized(self):
         conv_kernel = np.array([[1, 1, 1],
                                 [1, 0, 1],
                                 [1, 1, 1]])
@@ -82,9 +82,12 @@ if __name__ == "__main__":
     game = GameofLife(dim=150, max_step=25, sparseness=0.5, seed=42)
     game.run_and_plot(optimized=True, pause_between_frames=0.0)
     print("Evaluation time: " + str(time() - t1))
+    
     t2 = time()
     game2 = GameofLife(dim=150, max_step=25, sparseness=0.5, seed=42)
     game2.run_and_plot(optimized=False, pause_between_frames=0.0)
-
-    print(np.sum(np.sum(game.board-game2.board)))
     print("Evaluation time: " + str(time() - t2))
+    
+    # check if there is a discrepancy between the results
+    print(np.sum(np.sum(game.board-game2.board)))
+    
