@@ -67,7 +67,7 @@ class GameofLife:
             if optimized:
                 self._step_optimized()
             else:
-                self._mixed()
+                self._step_unoptimized()
 
             fig.canvas.restore_region(bg)
             ln = ax.imshow(self.board, animated=True, cmap="binary")
